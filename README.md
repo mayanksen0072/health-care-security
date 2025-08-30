@@ -17,7 +17,9 @@ This project showcases a **medical-grade security solution** that combines biome
 
 ### ✨ Key Features
 
-- **🔐 Biometric Authentication**: Face or fingerprint-based initial login
+- **🔐 Multi-Provider Authentication**: Credentials, Google OAuth, GitHub OAuth, and real biometric authentication
+- **📱 Real Biometric Authentication**: Face recognition using camera and fingerprint sensor support
+- **👥 Role-Based Access Control**: Physicians, Nurses, and Admins with department assignments
 - **📊 Continuous Behavioral Monitoring**: Real-time tracking of typing patterns and mouse movements
 - **🚨 Anomaly Detection**: Adaptive scoring system that flags suspicious behavior
 - **⚡ Zero-Friction Security**: Background monitoring without interrupting user workflows
@@ -25,6 +27,8 @@ This project showcases a **medical-grade security solution** that combines biome
 - **📈 Real-Time Analytics**: Live dashboards and behavioral insights
 - **🔄 Adaptive Trust Scoring**: Dynamic security based on user behavior
 - **🎯 Session Takeover Prevention**: Detect unauthorized access attempts
+- **🛡️ JWT Session Management**: Secure token-based authentication with automatic validation
+- **🔒 Biometric Enrollment**: Secure setup and management of biometric authentication methods
 
 ## 🚀 Quick Start
 
@@ -70,16 +74,27 @@ This project showcases a **medical-grade security solution** that combines biome
 - 🏥 **Healthcare-focused** messaging and use cases
 
 ### 🔐 2. Login Page
-- 📱 **Simulated biometric authentication** interface
+- 🔐 **Multi-provider authentication** (Credentials, Google, GitHub)
+- 📱 **Real biometric authentication** (Face recognition + Fingerprint)
+- 👥 **Role-based user management** with demo credentials
 - 🔒 **Demonstrates the initial security layer**
 - 🎯 **User-friendly** authentication flow
 
 ### 📊 3. Dashboard (Demo EHR)
+- 👤 **User Profile**: Display authenticated user information and role
+- 🔒 **Biometric Setup**: Link to enroll face and fingerprint authentication
 - 👥 **Patient Management**: Search and view mock patient records
 - 🔄 **Continuous Authentication**: Real-time behavioral monitoring
 - 🛡️ **Session Status**: Trust scoring and security controls
 - 🚨 **Anomaly Feed**: Live detection of suspicious behavior patterns
 - 📈 **Real-time Analytics**: Behavioral metrics and charts
+
+### 🔐 4. Biometric Enrollment Page
+- 📱 **Face Recognition Setup**: Camera-based facial enrollment
+- 👆 **Fingerprint Enrollment**: Device sensor-based fingerprint setup
+- 🔒 **Secure Enrollment**: Encrypted biometric data storage
+- 📊 **Enrollment Status**: Track completion of biometric methods
+- 🛡️ **Privacy Controls**: User-controlled biometric data management
 
 ## 🔧 Technical Architecture
 
@@ -89,6 +104,8 @@ This project showcases a **medical-grade security solution** that combines biome
 - 🎨 **Styling**: Tailwind CSS with shadcn/ui components
 - 📊 **Charts**: Recharts for real-time data visualization
 - 🔄 **State Management**: React hooks and local state
+- 🔐 **Authentication**: NextAuth.js with JWT sessions
+- 📱 **Biometric Auth**: Face-api.js for face recognition, WebAuthn for fingerprint
 
 ### 🔧 Key Components
 
@@ -128,14 +145,19 @@ biometric-behavior-mvp/
 ├── 📁 app/                    # Next.js App Router pages
 │   ├── 📊 dashboard/         # Main EHR dashboard
 │   ├── 🔐 login/            # Authentication page
-│   └── 🏠 page.tsx          # Landing page
+│   ├── 🔐 enroll/           # Biometric enrollment page
+│   ├── 🏠 page.tsx          # Landing page
+│   └── api/auth/            # NextAuth API routes
 ├── 🧩 components/           # React components
 │   ├── 🎨 ui/              # shadcn/ui components
+│   ├── 🔐 auth/            # Authentication components
+│   ├── 📱 biometric/       # Biometric authentication components
 │   ├── 🚨 anomaly-feed.tsx # Anomaly detection display
 │   ├── 📊 behavior-tracker.tsx # Behavioral monitoring
 │   └── 🔐 re-auth-dialog.tsx # Re-authentication modal
 ├── 📚 lib/                 # Utility functions
 ├── 🪝 hooks/               # Custom React hooks
+├── 📝 types/               # TypeScript type definitions
 └── 📂 public/              # Static assets
 ```
 
@@ -178,8 +200,10 @@ npm run lint     # 🔍 Run ESLint
 ```
 
 ### ⚙️ Environment Setup
-The project uses default Next.js configuration. For production deployment, consider:
-- 🔧 **Environment variables** for API endpoints
+The project uses NextAuth.js for authentication. For setup instructions, see [AUTHENTICATION_SETUP.md](./AUTHENTICATION_SETUP.md).
+
+For production deployment, consider:
+- 🔧 **Environment variables** for API endpoints and OAuth providers
 - 🗄️ **Database configuration** for persistent storage
 - 🔒 **SSL/TLS certificates** for secure communication
 - 📊 **Analytics integration** for usage tracking
